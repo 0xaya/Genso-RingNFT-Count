@@ -81,7 +81,10 @@ const App = () => {
             </tbody>
           </table>
         ) : (
-          <div>データ取得中...</div>
+          <div>
+            <img src="loading-icon.svg" className="-mt-[2px] mr-1 w-6" />
+            データ取得中...
+          </div>
         )}
       </div>
     </main>
