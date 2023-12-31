@@ -13,8 +13,9 @@ const App = () => {
               <tr className="text-xs">
                 <th>Type</th>
                 <th>合成wallet</th>
-                <th>マケプレ出品中</th>
+                <th>出品中</th>
                 <th>その他も含めた合計</th>
+                <th>最安値</th>
               </tr>
             </thead>
 
@@ -33,12 +34,18 @@ const App = () => {
                   <td>
                     <strong>{data.total}</strong>
                   </td>
+                  <td className="text-small text-primary font-light">
+                    ${data.lowestPrice}
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         ) : (
-          <div>データ取得中...</div>
+          <div>
+            <img src="loading-icon.svg" className="-mt-[2px] mr-1 w-6" />
+            データ取得中...
+          </div>
         )}
       </div>
       <div className="my-20">
@@ -58,8 +65,13 @@ const App = () => {
                   <td>{crystalName}</td>
 
                   {Object.entries(ownerLabels).map(([address, ownerLabel]) => {
-                    if (data.owners[address] > 0 && address === '0x5b00f8c66a9128549771a03abcfe3fd124abffdc') {
-                      return <td key={ownerLabel}>{data.owners[address] / 30}</td>;
+                    if (
+                      data.owners[address] > 0 &&
+                      address === "0x5b00f8c66a9128549771a03abcfe3fd124abffdc"
+                    ) {
+                      return (
+                        <td key={ownerLabel}>{data.owners[address] / 30}</td>
+                      );
                     } else {
                       return;
                     }

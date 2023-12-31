@@ -30,11 +30,13 @@ export const useCrystalCounter = () => {
         let totalPage;
         let totalAmount = 0;
         let owners = {};
+        const crystalNftId = `120000000${tokenId}0000000`;
+        const crystalItemId = `20000000${tokenId}`;
         do {
           const params = {
             chainShortName: "POLYGON",
             tokenContractAddress: "0xa72815200ba44a2472b24ebe22e453e49904ec33",
-            tokenId: `120000000${tokenId}0000000`,
+            tokenId: crystalNftId,
             limit: "100",
             page: currentPage.toString(),
           };
@@ -110,10 +112,14 @@ export const useCrystalCounter = () => {
           await new Promise((resolve) => setTimeout(resolve, 1000));
         } while (currentPage <= totalPage);
 
+        const lowestPrice = await getCrystalLowestPrice(crystalItemId);
+        console.log(lowestPrice);
+
         setTotalAmounts((prevAmounts) => {
           const updatedAmounts = { ...prevAmounts };
           updatedAmounts[crystalName] = {
             total: totalAmount, // Include the totalAmount in the amounts object
+            lowestPrice: lowestPrice,
             owners: owners, // Set the owners object for this crystal type
           };
           return updatedAmounts;
@@ -126,6 +132,29 @@ export const useCrystalCounter = () => {
 
     fetchCrystalData();
   }, []); // Make sure to include any dependencies if needed
+
+  const getCrystalLowestPrice = async (crystalItemId) => {
+    const url = `https://api-market.genso.game/api/market/consumption?page=1&itemType=consumption_item&rarity=&sort=lowest&status=&limit=12&search=${crystalItemId}`;
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {},
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data.sellingOrders[0].currentUnitPrice;
+    } catch (error) {
+      console.log(
+        `Error fetching the lowest price for ${crystalItemId}:`,
+        error,
+      );
+    }
+  };
+
   return {
     loading,
     totalAmounts,

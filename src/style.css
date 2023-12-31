@@ -142,12 +142,20 @@ tr:hover {
 }
 
 /* Set a specific width for the last 3 columns */
-td:nth-last-child(-n+3), th:nth-last-child(-n+3) {
-  width: 25%; /* Adjust the width as needed */
+td:nth-last-child(-n+4), th:nth-last-child(-n+4) {
+  width: 18%; /* Adjust the width as needed */
 }
-
 
 main {
   max-width: 90%;
   margin: 20px auto;
+}
+
+@media (max-width: 480px) {
+  th,td {
+    padding: 12px 10px;
+  }
+  td:nth-last-child(-n+4), th:nth-last-child(-n+4) {
+    width: 20%; /* Adjust the width as needed */
+  }
 }
