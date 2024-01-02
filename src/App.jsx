@@ -34,8 +34,13 @@ const App = () => {
                   <td>
                     <strong>{data.total}</strong>
                   </td>
-                  <td className="text-small text-primary font-light">
-                    ${data.lowestPrice}
+                  <td className="text-small text-primary font-light whitespace-nowrap">
+                    {data.lowestPrice.currentCurrency === "MV" ? (
+                      <img src="MV.png" className="-mt-[2px] mr-1 w-4" />
+                    ) : (
+                      <img src="USDT.svg" className="-mt-[2px] mr-1 w-4" />
+                    )}
+                    {data.lowestPrice.currentUnitPrice.toFixed(2)}
                   </td>
                 </tr>
               ))}
@@ -43,7 +48,7 @@ const App = () => {
           </table>
         ) : (
           <div>
-            <img src="loading-icon.svg" className="-mt-[2px] mr-1 w-6" />
+            <img src="loading-icon.svg" className="-mt-[3px] mr-1 w-6" />
             データ取得中...
           </div>
         )}

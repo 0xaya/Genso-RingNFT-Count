@@ -113,7 +113,6 @@ export const useCrystalCounter = () => {
         } while (currentPage <= totalPage);
 
         const lowestPrice = await getCrystalLowestPrice(crystalItemId);
-        console.log(lowestPrice);
 
         setTotalAmounts((prevAmounts) => {
           const updatedAmounts = { ...prevAmounts };
@@ -146,7 +145,11 @@ export const useCrystalCounter = () => {
       }
 
       const data = await response.json();
-      return data.sellingOrders[0].currentUnitPrice;
+      console.log(data.sellingOrders[0]);
+      return {
+        currentCurrency: data.sellingOrders[0].currentCurrency,
+        currentUnitPrice: data.sellingOrders[0].currentUnitPrice,
+      };
     } catch (error) {
       console.log(
         `Error fetching the lowest price for ${crystalItemId}:`,
