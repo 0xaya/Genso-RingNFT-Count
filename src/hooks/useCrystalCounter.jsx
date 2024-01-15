@@ -117,6 +117,7 @@ export const useCrystalCounter = () => {
         setTotalAmounts((prevAmounts) => {
           const updatedAmounts = { ...prevAmounts };
           updatedAmounts[crystalName] = {
+            crystalItemId: crystalItemId,
             total: totalAmount, // Include the totalAmount in the amounts object
             lowestPrice: lowestPrice,
             owners: owners, // Set the owners object for this crystal type
@@ -145,7 +146,7 @@ export const useCrystalCounter = () => {
       }
 
       const data = await response.json();
-      console.log(data.sellingOrders[0]);
+      // console.log(data.sellingOrders[0]);
       return {
         currentCurrency: data.sellingOrders[0].currentCurrency,
         currentUnitPrice: data.sellingOrders[0].currentUnitPrice,

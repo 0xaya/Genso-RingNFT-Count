@@ -34,13 +34,20 @@ const App = () => {
                   <td>
                     <strong>{data.total}</strong>
                   </td>
-                  <td className="text-small text-primary font-light whitespace-nowrap">
-                    {data.lowestPrice.currentCurrency === "MV" ? (
-                      <img src="MV.png" className="-mt-[2px] mr-1 w-4" />
-                    ) : (
-                      <img src="USDT.svg" className="-mt-[2px] mr-1 w-4" />
-                    )}
-                    {data.lowestPrice.currentUnitPrice.toFixed(2)}
+                  <td className="p-[1px]">
+                    <a
+                      target="_blank"
+                      href={`https://market.genso.game/ja/marketplace/consumption-items?nftId=${data.crystalItemId}`}
+                    >
+                      <div className="rounded-xl border whitespace-nowrap font-bold text-[0.8rem] p-[3px] text-white text-center">
+                        {data.lowestPrice.currentCurrency === "MV" ? (
+                          <img src="MV.png" className="-mt-[2px] mr-1 w-4" />
+                        ) : (
+                          <img src="USDT.svg" className="-mt-[2px] mr-1 w-4" />
+                        )}
+                        {data.lowestPrice.currentUnitPrice.toFixed(2)}
+                      </div>
+                    </a>
                   </td>
                 </tr>
               ))}
