@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useCrystalCounter } from "./hooks/useCrystalCounter";
+import { FiChevronsRight } from "react-icons/fi";
+import { GiDiamondRing } from "react-icons/gi";
+import { BsGem } from "react-icons/bs";
 
 const App = () => {
   const { loading, totalAmounts, ownerLabels } = useCrystalCounter();
   return (
     <main>
       <div className="mt-10">
-        <h1 className="my-4">クリスタルの数</h1>
+        <h1 className="my-4">
+          {" "}
+          <BsGem className="-mt-[0.2em] mr-2 inline text-3xl" />
+          クリスタルの数
+        </h1>
         {!loading ? (
           <table className="w-full mb-5 max-w-[600px]">
             <thead>
@@ -34,18 +41,19 @@ const App = () => {
                   <td>
                     <strong>{data.total}</strong>
                   </td>
-                  <td className="p-[1px]">
+                  <td className="px-[2px]">
                     <a
                       target="_blank"
                       href={`https://market.genso.game/ja/marketplace/consumption-items?nftId=${data.crystalItemId}`}
                     >
-                      <div className="rounded-xl border whitespace-nowrap font-bold text-[0.8rem] p-[3px] text-white text-center">
+                      <div className="rounded-xl py-[2px] bg-background-3 whitespace-nowrap text-[0.8rem] text-white flex justify-center items-center">
                         {data.lowestPrice.currentCurrency === "MV" ? (
-                          <img src="MV.png" className="-mt-[2px] mr-1 w-4" />
+                          <img src="MV.png" className="mx-1 w-3 h-3" />
                         ) : (
-                          <img src="USDT.svg" className="-mt-[2px] mr-1 w-4" />
+                          <img src="USDT.svg" className="mx-1 w-3 h-3" />
                         )}
                         {data.lowestPrice.currentUnitPrice.toFixed(2)}
+                        <FiChevronsRight className="ml-[2px]" />
                       </div>
                     </a>
                   </td>
@@ -61,7 +69,10 @@ const App = () => {
         )}
       </div>
       <div className="my-20">
-        <h1 className="my-4">リングの数</h1>
+        <h1 className="my-4">
+          <GiDiamondRing className="-mt-[0.2em] mr-2 inline text-4xl" />
+          リングの数
+        </h1>
         {!loading ? (
           <table className="w-full mb-5 max-w-[600px]">
             <thead>
@@ -94,7 +105,7 @@ const App = () => {
           </table>
         ) : (
           <div>
-            <img src="loading-icon.svg" className="-mt-[2px] mr-1 w-6" />
+            <img src="loading-icon.svg" className="-mt-[1px] mr-1 w-6" />
             データ取得中...
           </div>
         )}

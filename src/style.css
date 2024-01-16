@@ -159,6 +159,6 @@ main {
     width: 20%; /* Adjust the width as needed */
   }
   td:nth-child(1), th:nth-child(1) {
-    width: 15%; /* Adjust the width as needed */
+    width: 16%; /* Adjust the width as needed */
   }
 }
